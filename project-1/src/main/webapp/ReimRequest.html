@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	div{
+		position: absolute;
+  	top: 50%;
+  	left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: lightblue;
+		text-align: center;
+	}
+	</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+	<form method="POST" action="/project-1/Reim/InputReim">
+		<p>Welcome to the Reimbursement please login.</p>
+		<input type="number" placeholder="amount" name="amount"/><br>
+
+		<label>Lodging</label>
+		<input type="radio" name="type" value = "1"/>
+		<label>Travel</label>
+		<input type="radio" name="type" value = "2"/>
+		<label>Food</label>
+		<input type="radio" name="type" value = "3"/>
+		<label>Other</label>
+		<input type="radio" name="type" value = "4"/><br>
+
+		<input type="hidden" name="status" value = "1"/>
+
+		<textarea name="description">
+  		</textarea>
+  		<br>
+
+  		<input type="submit" value="submit"/>
+	</form>
+	<br>
+
+	<form method="POST" action="/project-1/Reim/home">
+	<input type="submit" value="return"/>
+	</form>
+</div>
+	<script src="script/ReimReq.js"></script>
+	<script>
+
+
+
+	</script>
+
+</body>
+</html>

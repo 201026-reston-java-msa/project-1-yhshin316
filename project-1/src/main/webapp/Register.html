@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<style>
+		div{
+			position: absolute;
+	  	top: 50%;
+	  	left: 50%;
+			transform: translate(-50%, -50%);
+			background-color: lightblue;
+			text-align: center;
+		}
+		</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+	<form method="POST" action="/project-1/Reim/register">
+		<p>Welcome to the Reimbursement please login.</p>
+		<input type="text" placeholder="username" name="username"/><br>
+		<input type="text" placeholder="password" name="password"/><br>
+		<input type="text" placeholder="firstname" name="firstname"/><br>
+		<input type="text" placeholder="lastname" name="lastname"/><br>
+		<input type="text" placeholder="email" name="email"/><br>
+		<label>Employee</label>
+		<input type="radio" value="1" name="role" id="myRadio"/>
+		<label>Manager</label>
+		<input type="radio" value="2" name="role"/><br>
+		<input type="submit" value="Register"/>
+	</form>
+
+	<br>
+
+	<form method="POST" action="/project-1/Reim/log">
+	<input type="submit" value="return"/>
+	</form>
+</div>
+	<script>
+
+	document.getElementById("myRadio").required = true;
+
+	</script>
+</body>
+</html>

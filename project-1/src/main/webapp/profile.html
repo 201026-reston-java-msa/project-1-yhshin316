@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	div{
+		position: absolute;
+  	top: 50%;
+  	left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: lightblue;
+		text-align: center;
+	}
+	</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body onload = "fun()">
+	<div>
+	<form method="POST" action="/project-1/Reim/UpdateProfile">
+		<p>Please edit your profile as you wish.</p>
+		<label>Username</label>
+		<input type="text" placeholder="username" name="username" id ="username"/><br>
+		<label>Password</label>
+		<input type="text" placeholder="password" name="password" id = "password"/><br>
+		<label>First Name</label>
+		<input type="text" placeholder="firstname" name="firstname" id = "firstname"/><br>
+		<label>Last Name</label>
+		<input type="text" placeholder="lastname" name="lastname" id = "lastname"/><br>
+		<label>Email</label>
+		<input type="text" placeholder="email" name="email" id = "email"/><br>
+		<label>Employee</label>
+		<input type="radio" value="1" name="role" id="myRadio"/>
+		<label>Manager</label>
+		<input type="radio" value="2" name="role"/><br>
+		<input type="submit" value="Update"/>
+	</form>
+
+	<form method="POST" action="/project-1/Reim/home">
+		<input type="submit" value="return"/>
+	</form>
+	</div>
+
+	<script>
+
+	document.getElementById("myRadio").required = true;
+
+	var list;
+
+	function fun(){
+	  fetch('http://localhost:8080/project-1/Reim/GetProfile')
+	        .then(function (response) {
+	            return response.json();
+	        })
+	        .then(function (data) {
+	            console.log(data);
+	        	document.getElementById("username").value = data.username;
+	        	document.getElementById("password").value = data.password;
+	        	document.getElementById("firstname").value = data.firstName;
+	        	document.getElementById("lastname").value = data.lastName;
+	        	document.getElementById("email").value = data.email;
+
+	        })
+	        .catch(function (err) {
+	            console.log("Something went wrong!", err);
+	        });
+	}
+	  </script>
+
+</body>
+</html>

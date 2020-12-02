@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	div{
+		position: absolute;
+  	top: 50%;
+  	left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: lightblue;
+		text-align: center;
+	}
+	</style>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+	<form method="GET" action="/project-1/Reim/UpdateReim">
+		<p>Please type in the Reimbursement ID and Choose the Status</p>
+		<input type="number" name="id"><br>
+		<Label>Pending</Label>
+		<input type="radio" name="status" value="1">
+		<Label>Accepted</Label>
+		<input type="radio" name="status" value="2">
+		<Label>Denied</Label>
+		<input type="radio" name="status" value="3"><br>
+		<input type="submit" value="Reimbursement Update"/>
+	</form>
+
+	<form method="POST" action="/project-1/Reim/home">
+		<input type="submit" value="return" />
+	</form>
+</div>
+</body>
+</html>

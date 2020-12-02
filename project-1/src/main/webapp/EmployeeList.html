@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  #myInput{
+    size:"100";
+  }
+  table, th, td {
+    border: 1px solid black;
+  }
+  table{
+		width:100%;
+	}
+  </style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body onload="fun()">
+
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Employee names..">
+
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>First Name</th>
+				<th>Status</th>
+				<th>Email</th>
+				<th>Role</th>
+			</tr>
+		</thead>
+		<tbody id="body">
+
+		</tbody>
+	</table>
+
+	<form method="POST" action="/project-1/Reim/home">
+		<input type="submit" value="return" />
+	</form>
+
+<script>
+
+function fun(){
+  fetch('http://localhost:8080/project-1/Reim/GetAllEmployee')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            //console.log(data);
+            list = data;
+
+            console.log(data)
+
+            for(let i=0;i<data.length;i++){
+
+              var tbody = document.getElementById("body");
+              var bodytr = document.createElement("tr");
+              tbody.appendChild(bodytr);
+
+              var bodytd1 = document.createElement("td");
+              bodytr.appendChild(bodytd1);
+              var content = document.createTextNode(list[i].id);
+              bodytd1.appendChild(content)
+
+              var bodytd1 = document.createElement("td");
+              bodytr.appendChild(bodytd1);
+              var content = document.createTextNode(list[i].username);
+              bodytd1.appendChild(content)
+
+              var bodytd1 = document.createElement("td");
+              bodytr.appendChild(bodytd1);
+              var content = document.createTextNode(list[i].password);
+              bodytd1.appendChild(content)
+
+              var bodytd1 = document.createElement("td");
+              bodytr.appendChild(bodytd1);
+              var content = document.createTextNode(list[i].firstName);
+              bodytd1.appendChild(content)
+
+              var bodytd1 = document.createElement("td");
+              bodytr.appendChild(bodytd1);
+              var content = document.createTextNode(list[i].lastName);
+              bodytd1.appendChild(content)
+
+              var bodytd1 = document.createElement("td");
+              bodytr.appendChild(bodytd1);
+              var content = document.createTextNode(list[i].email);
+              bodytd1.appendChild(content)
+
+              var bodytd1 = document.createElement("td");
+              bodytr.appendChild(bodytd1);
+              var content = document.createTextNode(list[i].role.role);
+              bodytd1.appendChild(content)
+
+            }
+
+        })
+        .catch(function (err) {
+            console.log("Something went wrong!", err);
+        });
+}
+
+////////////////////
+
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+</script>
+</body>
+</html>

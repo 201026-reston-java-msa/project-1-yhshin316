@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+table{
+  width:100%;
+}
+</style>
+<title>Insert title here</title>
+</head>
+<body onload="fun()">
+
+	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for Employee usernames..">
+
+	<table id="myTable">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Amount</th>
+				<th>Description</th>
+				<th>Type</th>
+				<th>Status</th>
+				<th>Date(D/M/Y)</th>
+				<th>Employee</th>
+				<th>Approver</th>
+			</tr>
+		</thead>
+		<tbody id="body">
+
+		</tbody>
+	</table>
+
+	<form method="POST" action="/project-1/Reim/UpdateReimPage">
+		<input type="submit" value="Update Reimbursement" />
+	</form>
+
+	<form method="POST" action="/project-1/Reim/home">
+		<input type="submit" value="return" />
+	</form>
+
+	<script>
+
+	var list;
+
+	function fun(){
+	  fetch('http://localhost:8080/project-1/Reim/GetAllReim')
+	        .then(function (response) {
+	            return response.json();
+	        })
+	        .then(function (data) {
+	            //console.log(data);
+	            list = data;
+
+	            console.log(data)
+
+	            for(let i=0;i<data.length;i++){
+
+	              var tbody = document.getElementById("body");
+	              var bodytr = document.createElement("tr");
+	              tbody.appendChild(bodytr);
+
+	              var bodytd1 = document.createElement("td");
+	              bodytr.appendChild(bodytd1);
+	              var content = document.createTextNode(list[i].id);
+	              bodytd1.appendChild(content)
+
+	              var bodytd1 = document.createElement("td");
+	              bodytr.appendChild(bodytd1);
+	              var content = document.createTextNode(list[i].amount);
+	              bodytd1.appendChild(content)
+
+	              var bodytd1 = document.createElement("td");
+	              bodytr.appendChild(bodytd1);
+	              var content = document.createTextNode(list[i].description);
+	              bodytd1.appendChild(content)
+
+	              var bodytd1 = document.createElement("td");
+	              bodytr.appendChild(bodytd1);
+	              var content = document.createTextNode(ty(list[i].type.id));
+	              bodytd1.appendChild(content)
+
+	              var bodytd1 = document.createElement("td");
+	              bodytr.appendChild(bodytd1);
+	              var content = document.createTextNode(stat(list[i].status.id));
+	              bodytd1.appendChild(content)
+
+	              var bodytd1 = document.createElement("td");
+	              bodytr.appendChild(bodytd1);
+	              var content = document.createTextNode(list[i].date);
+	              bodytd1.appendChild(content)
+
+	              var bodytd1 = document.createElement("td");
+	              bodytr.appendChild(bodytd1);
+	              var content = document.createTextNode(list[i].employeeid.username);
+	              bodytd1.appendChild(content)
+                if(list[i].managerid!=null){
+                  var bodytd1 = document.createElement("td");
+  	              bodytr.appendChild(bodytd1);
+  	              var content = document.createTextNode(list[i].managerid.username);
+  	              bodytd1.appendChild(content)
+                }else{
+                  var bodytd1 = document.createElement("td");
+  	              bodytr.appendChild(bodytd1);
+  	              var content = document.createTextNode("");
+  	              bodytd1.appendChild(content)
+                }
+	            }
+
+	        })
+	        .catch(function (err) {
+	            console.log("Something went wrong!", err);
+	        });
+
+	}
+
+	function stat(num){
+		if(num==3){
+			return "Denied"
+		}else if(num==2){
+			return "Accepted"
+		}else{
+			return "Pending"
+		}
+	}
+
+	function ty(num){
+		if(num==4){
+			return "Other"
+		}else if(num==3){
+			return "Food"
+		}else if(num==2){
+			return "Travel"
+		}else{
+			return "Lodging"
+		}
+	}
+///////////////////////////////////////////////
+	function myFunction() {
+	  // Declare variables
+	  var input, filter, table, tr, td, i, txtValue;
+	  input = document.getElementById("myInput");
+	  filter = input.value.toUpperCase();
+	  table = document.getElementById("myTable");
+	  tr = table.getElementsByTagName("tr");
+
+	  // Loop through all table rows, and hide those who don't match the search query
+	  for (i = 0; i < tr.length; i++) {
+	    td = tr[i].getElementsByTagName("td")[6];
+	    if (td) {
+	      txtValue = td.textContent || td.innerText;
+	      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+	        tr[i].style.display = "";
+	      } else {
+	        tr[i].style.display = "none";
+	      }
+	    }
+	  }
+	}
+
+
+	</script>
+</body>
+</html>

@@ -9,4 +9,24 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+		<servlet-name>MasterServ</servlet-name>
+		<servlet-class>com.revature.servlet.ForwardingMasterServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MasterServ</servlet-name>
+		<url-pattern>/Reim/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TestServ</servlet-name>
+		<servlet-class>com.revature.servlet.TestServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>TestServ</servlet-name>
+		<url-pattern>/Test/*</url-pattern>
+	</servlet-mapping>
 </web-app>
